@@ -1,4 +1,5 @@
 import { Route, Switch } from "react-router-dom";
+import AddCourse from "./AddCourse";
 // import { observer } from "mobx-react";
 
 import Home from "./Home";
@@ -12,6 +13,10 @@ const Routes = () => {
       </Route>
       <Route path="/signin">
         <Signin />
+      </Route>
+
+      <Route path="/addcourse">
+        <AddCourse />
       </Route>
       <Route path="/">
         <Home />

@@ -10,11 +10,13 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-
+import Modal from "react-bootstrap/Modal";
+import ModalHeader from "react-bootstrap/ModalHeader";
 import { Redirect } from "react-router-dom";
 import { observer } from "mobx-react";
-
+import ModalTitle from "react-bootstrap/ModalTitle";
 import authStore from "../stores/authStore";
+import ModalFooter from "react-bootstrap/ModalFooter";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -47,13 +49,22 @@ const Signin = () => {
     setUser({ ...user, [event.target.name]: event.target.value });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    await authStore.signin(user);
     console.log(user);
     console.log(handleSubmit);
 
-    event.preventDefault();
-    authStore.signin(user);
+    if (!authStore.user) {
+      handleShow();
+    } else {
+    }
   };
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   return (
     <Container component="main" maxWidth="xs">
@@ -110,6 +121,14 @@ const Signin = () => {
           >
             Sign In
           </Button>
+          <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>تنبية</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>الرجاء التأكد من كلمة السر </Modal.Body>
+            <Modal.Footer></Modal.Footer>
+          </Modal>
+
           <Grid container>
             <Grid item xs></Grid>
           </Grid>

@@ -21,3 +21,10 @@ export const AuthButtonStyled = styled.button`
     color: #f1f1f1;
   }
 `;
+
+export const Tabledata = styled.p`
+  text-align: center;
+
+  font-family: sans-serif;
+  font-size: 18px;
+`;
